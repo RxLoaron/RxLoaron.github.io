@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="1.确保所有表都有主键2.">
+<meta name="description" content="1.确保所有表都有主键当缺少主键，容易引起数据重复、数据不一致、查询缓慢等问题。如果不希望非键列出现重复数据，在列上定义唯一索引以保证其完整性。 2.避免存储冗余数据数据库规范化的目标是消除冗余数据，并在处理数据时最小化资源消耗。通过消除冗余数据，避免插入、更新和删除时出现异常。通过消除冗余数据，尽量减少数据的不一致性。 3.消除重复数据组记住一个原则：列昂贵，行更宜">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编写高质量sql语句的61个方法">
 <meta property="og:url" content="https://rxloaron.github.io/2019/05/23/effective-sql/index.html">
 <meta property="og:site_name" content="RxLoaron&#39;s Blog">
-<meta property="og:description" content="1.确保所有表都有主键2.">
+<meta property="og:description" content="1.确保所有表都有主键当缺少主键，容易引起数据重复、数据不一致、查询缓慢等问题。如果不希望非键列出现重复数据，在列上定义唯一索引以保证其完整性。 2.避免存储冗余数据数据库规范化的目标是消除冗余数据，并在处理数据时最小化资源消耗。通过消除冗余数据，避免插入、更新和删除时出现异常。通过消除冗余数据，尽量减少数据的不一致性。 3.消除重复数据组记住一个原则：列昂贵，行更宜">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-23T06:26:10.333Z">
+<meta property="og:updated_time" content="2019-12-13T02:27:09.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编写高质量sql语句的61个方法">
-<meta name="twitter:description" content="1.确保所有表都有主键2.">
+<meta name="twitter:description" content="1.确保所有表都有主键当缺少主键，容易引起数据重复、数据不一致、查询缓慢等问题。如果不希望非键列出现重复数据，在列上定义唯一索引以保证其完整性。 2.避免存储冗余数据数据库规范化的目标是消除冗余数据，并在处理数据时最小化资源消耗。通过消除冗余数据，避免插入、更新和删除时出现异常。通过消除冗余数据，尽量减少数据的不一致性。 3.消除重复数据组记住一个原则：列昂贵，行更宜">
 
 
 
@@ -319,7 +319,9 @@
       
 
       
-        <h4 id="1-确保所有表都有主键"><a href="#1-确保所有表都有主键" class="headerlink" title="1.确保所有表都有主键"></a>1.确保所有表都有主键</h4><p>2.</p>
+        <p><strong>1.确保所有表都有主键</strong><br>当缺少主键，容易引起数据重复、数据不一致、查询缓慢等问题。<br>如果不希望非键列出现重复数据，在列上定义唯一索引以保证其完整性。</p>
+<p><strong>2.避免存储冗余数据</strong><br>数据库规范化的目标是消除冗余数据，并在处理数据时最小化资源消耗。<br>通过消除冗余数据，避免插入、更新和删除时出现异常。<br>通过消除冗余数据，尽量减少数据的不一致性。</p>
+<p><strong>3.消除重复数据组</strong><br><em>记住一个原则：列昂贵，行更宜</em></p>
 
       
     </div>
@@ -354,8 +356,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/13/《Code-Complete》reading-note/" rel="prev" title="《Code Complete》reading note">
-                《Code Complete》reading note <i class="fa fa-chevron-right"></i>
+              <a href="/2019/12/13/《Code-Complete》reading-note/" rel="prev" title="《代码大全》阅读记录">
+                《代码大全》阅读记录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -408,17 +410,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -480,22 +473,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-确保所有表都有主键"><span class="nav-number">1.</span> <span class="nav-text">1.确保所有表都有主键</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
