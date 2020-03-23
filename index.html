@@ -268,7 +268,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/13/《Code-Complete》reading-note/" itemprop="url">《代码大全》阅读记录</a></h2>
+                <a class="post-title-link" href="/2019/12/13/《Code-Complete》reading-note/" itemprop="url">《代码大全》阅读笔记</a></h2>
         
 
         <div class="post-meta">
@@ -442,6 +442,11 @@
             <p><strong>1.确保所有表都有主键</strong><br>当缺少主键，容易引起数据重复、数据不一致、查询缓慢等问题。<br>如果不希望非键列出现重复数据，在列上定义唯一索引以保证其完整性。</p>
 <p><strong>2.避免存储冗余数据</strong><br>数据库规范化的目标是消除冗余数据，并在处理数据时最小化资源消耗。<br>通过消除冗余数据，避免插入、更新和删除时出现异常。<br>通过消除冗余数据，尽量减少数据的不一致性。</p>
 <p><strong>3.消除重复数据组</strong><br><em>记住一个原则：列昂贵，行更宜</em></p>
+<p><strong>4.每列只存储一个属性</strong><br>正确的表设计是为每个属性分配单独的列，当列包含多个属性时，搜索和分组即使有可能做，也会是极其困难的。<br>对于某些应用程序，有过滤列中的某部分数据（如地址或电话号码）的需求，这可能会决定列的粒度级别。<br>当需要重新把属性组合成报表或打印清单时，使用连接。</p>
+<p><strong>5.理解为什么存储计算列通常有害无益</strong><br>许多数据库系统允许你在创建表时定义计算列，但应该注意性能影响，特别是在使用非确定表达式或函数的时候。<br>计算列会对数据库系统产生额外的开销，只有当利大于弊的时候才考虑使用它。<br>当不能使用索引时，使用视图来做计算通常可以作为在表里创建计算列的替代方法。</p>
+<p><strong>6.定义外键以确保引用完整性</strong><br>由于外键约束会降低数据库的性能，大部分互联网应用程序为了追求速度，并不设置外键约束，而是仅靠应用程序自身来保证逻辑的正确性。这种情况下，外键仅仅是一个普通的列，只是它起到了外键的作用而已。</p>
+<p><strong>7.确保表间关系的合理性</strong><br>业务是衡量数据建模是否正确的标准，并且还需要考虑应用程序的设计，<br>通常这有点难度，人们更倾向于使用应用程序来驱动数据模型设计，而实际应该是恰好相反的。<br>在现实项目中，选择不同的数据模型可能导致应用程序设计的重大变化，这些变化可能会影响应用程序的开发成本与上线时间。<br>再三斟酌，为了简化关系模型而合并包含相似宇段的表是否真的有意义。<br>在建模之前，检查你处理的数据是否是结构化数据，如果是半结构化的，则要做特殊的处理。</p>
+<p><strong>8.当第三范式不够时，采用更多范式</strong></p>
 
           
         
@@ -704,7 +709,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
