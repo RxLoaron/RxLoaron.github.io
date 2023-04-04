@@ -1,37 +1,317 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rxloaron.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="数据库驱动、数据库连接池、MySQL 的连接池一个不变的原则：网络连接必须让线程来处理SQL 接口：负责处理接收到的 SQL 语句查询解析器：让 MySQL 能看懂 SQL 语句查询优化器：选择最优的查询路径调用存储引擎接口，真正执行 SQL 语句执行器：根据执行计划调用存储引擎的接口 InnoDB 的重要内存结构：缓冲池(Buffer Pool)对 Buffer Pool 进行调整[server">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-实战-优化">
+<meta property="og:url" content="https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/index.html">
+<meta property="og:site_name" content="RxLoaron&#39;s Blog">
+<meta property="og:description" content="数据库驱动、数据库连接池、MySQL 的连接池一个不变的原则：网络连接必须让线程来处理SQL 接口：负责处理接收到的 SQL 语句查询解析器：让 MySQL 能看懂 SQL 语句查询优化器：选择最优的查询路径调用存储引擎接口，真正执行 SQL 语句执行器：根据执行计划调用存储引擎的接口 InnoDB 的重要内存结构：缓冲池(Buffer Pool)对 Buffer Pool 进行调整[server">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/05201038.png">
+<meta property="og:image" content="https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/05201153.png">
+<meta property="article:published_time" content="2022-05-20T01:41:17.000Z">
+<meta property="article:modified_time" content="2022-07-12T01:12:30.000Z">
+<meta property="article:author" content="RxLoaron">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/05201038.png">
 
 
-{% block content %}
+<link rel="canonical" href="https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/","path":"2022/05/20/mysql-practices-optimization/","title":"mysql-实战-优化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>mysql-实战-优化 | RxLoaron's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RxLoaron's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungry，Stay Foolish</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A9%B1%E5%8A%A8%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81MySQL-%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">1.</span> <span class="nav-text">数据库驱动、数据库连接池、MySQL 的连接池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%8F%98%E7%9A%84%E5%8E%9F%E5%88%99%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E5%BF%85%E9%A1%BB%E8%AE%A9%E7%BA%BF%E7%A8%8B%E6%9D%A5%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">一个不变的原则：网络连接必须让线程来处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-%E6%8E%A5%E5%8F%A3%EF%BC%9A%E8%B4%9F%E8%B4%A3%E5%A4%84%E7%90%86%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84-SQL-%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">SQL 接口：负责处理接收到的 SQL 语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A7%A3%E6%9E%90%E5%99%A8%EF%BC%9A%E8%AE%A9-MySQL-%E8%83%BD%E7%9C%8B%E6%87%82-SQL-%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">查询解析器：让 MySQL 能看懂 SQL 语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%EF%BC%9A%E9%80%89%E6%8B%A9%E6%9C%80%E4%BC%98%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%B7%AF%E5%BE%84"><span class="nav-number">5.</span> <span class="nav-text">查询优化器：选择最优的查询路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E6%8E%A5%E5%8F%A3%EF%BC%8C%E7%9C%9F%E6%AD%A3%E6%89%A7%E8%A1%8C-SQL-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text">调用存储引擎接口，真正执行 SQL 语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">7.</span> <span class="nav-text">执行器：根据执行计划调用存储引擎的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-%E7%9A%84%E9%87%8D%E8%A6%81%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%EF%BC%9A%E7%BC%93%E5%86%B2%E6%B1%A0-Buffer-Pool"><span class="nav-number">8.</span> <span class="nav-text">InnoDB 的重要内存结构：缓冲池(Buffer Pool)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A1%B5%EF%BC%9AMySQL-%E4%B8%AD%E6%8A%BD%E8%B1%A1%E5%87%BA%E6%9D%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8D%95%E4%BD%8D"><span class="nav-number">8.1.</span> <span class="nav-text">数据页：MySQL 中抽象出来的数据单位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE%E9%A1%B5%E5%92%8C-Buffer-Pool-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E9%A1%B5%E6%98%AF%E5%A6%82%E4%BD%95%E5%AF%B9%E5%BA%94%E8%B5%B7%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">8.2.</span> <span class="nav-text">磁盘上的数据页和 Buffer Pool 中的缓存页是如何对应起来的？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%A1%B5%E5%AF%B9%E5%BA%94%E7%9A%84%E6%8F%8F%E8%BF%B0%E4%BF%A1%E6%81%AF"><span class="nav-number">8.3.</span> <span class="nav-text">缓存页对应的描述信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9B%E7%BC%93%E5%AD%98%E9%A1%B5%E6%98%AF%E7%A9%BA%E9%97%B2%E7%9A%84%EF%BC%9F-free-%E9%93%BE%E8%A1%A8"><span class="nav-number">8.4.</span> <span class="nav-text">怎么知道哪些缓存页是空闲的？(free 链表)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B0%E6%8D%AE%E9%A1%B5%E6%9C%89%E6%B2%A1%E6%9C%89%E8%A2%AB%E7%BC%93%E5%AD%98%EF%BC%9F"><span class="nav-number">8.5.</span> <span class="nav-text">怎么知道数据页有没有被缓存？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E7%BC%93%E5%AD%98%E9%A1%B5%E6%98%AF%E8%84%8F%E9%A1%B5%EF%BC%9F"><span class="nav-number">8.6.</span> <span class="nav-text">哪些缓存页是脏页？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%98%E6%B1%B0%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="nav-number">8.7.</span> <span class="nav-text">淘汰缓存数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%86%B7%E7%83%AD%E6%95%B0%E6%8D%AE%E5%88%86%E7%A6%BB%E7%9A%84%E6%80%9D%E6%83%B3%E8%AE%BE%E8%AE%A1-LRU-%E9%93%BE%E8%A1%A8"><span class="nav-number">8.8.</span> <span class="nav-text">基于冷热数据分离的思想设计 LRU 链表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91-MySQL-%E7%9A%84%E9%A2%84%E8%AF%BB%E6%9C%BA%E5%88%B6"><span class="nav-number">8.9.</span> <span class="nav-text">触发 MySQL 的预读机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undo-%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E6%9B%B4%E6%96%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E4%BB%A5%E5%9B%9E%E6%BB%9A"><span class="nav-number">9.</span> <span class="nav-text">undo 日志文件：如何让你更新的数据可以回滚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redo-Log-Buffer%EF%BC%9A%E4%B8%87%E4%B8%80%E7%B3%BB%E7%BB%9F%E5%AE%95%E6%9C%BA%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">10.</span> <span class="nav-text">Redo Log Buffer：万一系统宕机，如何避免数据丢失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redo-%E6%97%A5%E5%BF%97%EF%BC%8C%E8%AE%B0%E5%BD%95%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%81%9A%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">11.</span> <span class="nav-text">redo 日志，记录对数据做的修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%86-redo-%E6%97%A5%E5%BF%97%E5%86%99%E5%85%A5%E7%A3%81%E7%9B%98%E4%B8%AD"><span class="nav-number">12.</span> <span class="nav-text">交事务的时候将 redo 日志写入磁盘中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-binlog"><span class="nav-number">13.</span> <span class="nav-text">MySQL binlog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#binlog-%E6%97%A5%E5%BF%97%E7%9A%84%E5%88%B7%E7%9B%98%E7%AD%96%E7%95%A5"><span class="nav-number">14.</span> <span class="nav-text">binlog 日志的刷盘策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-binlog-%E5%92%8C-redo-log-%E5%AE%8C%E6%88%90%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8F%90%E4%BA%A4"><span class="nav-number">15.</span> <span class="nav-text">基于 binlog 和 redo log 完成事务的提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0-IO-%E7%BA%BF%E7%A8%8B%E9%9A%8F%E6%9C%BA%E5%B0%86%E5%86%85%E5%AD%98%E6%9B%B4%E6%96%B0%E5%90%8E%E7%9A%84%E8%84%8F%E6%95%B0%E6%8D%AE%E5%88%B7%E5%9B%9E%E7%A3%81%E7%9B%98"><span class="nav-number">16.</span> <span class="nav-text">后台 IO 线程随机将内存更新后的脏数据刷回磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QPS-TPS%E3%80%81IOPS%E3%80%81%E5%90%9E%E5%90%90%E9%87%8F%E3%80%81latency"><span class="nav-number">17.</span> <span class="nav-text">QPS.TPS、IOPS、吞吐量、latency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">18.</span> <span class="nav-text"></span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RxLoaron</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RxLoaron" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RxLoaron" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/05/20/mysql-practices-optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="mysql-实战-优化 | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql-实战-优化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-12 09:12:30" itemprop="dateModified" datetime="2022-07-12T09:12:30+08:00">2022-07-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="数据库驱动、数据库连接池、MySQL-的连接池"><a href="#数据库驱动、数据库连接池、MySQL-的连接池" class="headerlink" title="数据库驱动、数据库连接池、MySQL 的连接池"></a>数据库驱动、数据库连接池、MySQL 的连接池</h4><h4 id="一个不变的原则：网络连接必须让线程来处理"><a href="#一个不变的原则：网络连接必须让线程来处理" class="headerlink" title="一个不变的原则：网络连接必须让线程来处理"></a>一个不变的原则：网络连接必须让线程来处理</h4><h4 id="SQL-接口：负责处理接收到的-SQL-语句"><a href="#SQL-接口：负责处理接收到的-SQL-语句" class="headerlink" title="SQL 接口：负责处理接收到的 SQL 语句"></a>SQL 接口：负责处理接收到的 SQL 语句</h4><h4 id="查询解析器：让-MySQL-能看懂-SQL-语句"><a href="#查询解析器：让-MySQL-能看懂-SQL-语句" class="headerlink" title="查询解析器：让 MySQL 能看懂 SQL 语句"></a>查询解析器：让 MySQL 能看懂 SQL 语句</h4><h4 id="查询优化器：选择最优的查询路径"><a href="#查询优化器：选择最优的查询路径" class="headerlink" title="查询优化器：选择最优的查询路径"></a>查询优化器：选择最优的查询路径</h4><h4 id="调用存储引擎接口，真正执行-SQL-语句"><a href="#调用存储引擎接口，真正执行-SQL-语句" class="headerlink" title="调用存储引擎接口，真正执行 SQL 语句"></a>调用存储引擎接口，真正执行 SQL 语句</h4><h4 id="执行器：根据执行计划调用存储引擎的接口"><a href="#执行器：根据执行计划调用存储引擎的接口" class="headerlink" title="执行器：根据执行计划调用存储引擎的接口"></a>执行器：根据执行计划调用存储引擎的接口</h4><p><img src="/2022/05/20/mysql-practices-optimization/05201038.png"></p>
+<h4 id="InnoDB-的重要内存结构：缓冲池-Buffer-Pool"><a href="#InnoDB-的重要内存结构：缓冲池-Buffer-Pool" class="headerlink" title="InnoDB 的重要内存结构：缓冲池(Buffer Pool)"></a>InnoDB 的重要内存结构：缓冲池(Buffer Pool)</h4><p>对 Buffer Pool 进行调整<br>[server]<br>innodb_buffer_pool_size</p>
+<ul>
+<li><h5 id="数据页：MySQL-中抽象出来的数据单位"><a href="#数据页：MySQL-中抽象出来的数据单位" class="headerlink" title="数据页：MySQL 中抽象出来的数据单位"></a>数据页：MySQL 中抽象出来的数据单位</h5>磁盘文件中有很多的数据页，每一页数据里很多行数据</li>
+<li><h5 id="磁盘上的数据页和-Buffer-Pool-中的缓存页是如何对应起来的？"><a href="#磁盘上的数据页和-Buffer-Pool-中的缓存页是如何对应起来的？" class="headerlink" title="磁盘上的数据页和 Buffer Pool 中的缓存页是如何对应起来的？"></a>磁盘上的数据页和 Buffer Pool 中的缓存页是如何对应起来的？</h5>默认情况下，一个缓存页的大小和磁盘上的一个数据页的大小是一一对应，都是 16KB。</li>
+<li><h5 id="缓存页对应的描述信息"><a href="#缓存页对应的描述信息" class="headerlink" title="缓存页对应的描述信息"></a>缓存页对应的描述信息</h5>描述信息本身也是一块数据，在 Buffer Pool 中，每个缓存页的描述数据放在最前面，然后各个缓存页放在后面。描述信息包括：这个数据页所属的表空间、数据页的编号、这个缓存页在 Buffer Pool 中的地址等等其他信息。</li>
+<li><h5 id="怎么知道哪些缓存页是空闲的？-free-链表"><a href="#怎么知道哪些缓存页是空闲的？-free-链表" class="headerlink" title="怎么知道哪些缓存页是空闲的？(free 链表)"></a>怎么知道哪些缓存页是空闲的？(free 链表)</h5>free 链表，是一个双向链表数据结构，free 链表里，每个节点就是一个空闲的缓存<br>页的描述数据块的地址，也就是，只要一个缓存页是空闲的，那么他的描述数据块就会被放入这个 free 链表中。</li>
+<li><h5 id="怎么知道数据页有没有被缓存？"><a href="#怎么知道数据页有没有被缓存？" class="headerlink" title="怎么知道数据页有没有被缓存？"></a>怎么知道数据页有没有被缓存？</h5>数据页缓存哈希表的结构。</li>
+<li><h5 id="哪些缓存页是脏页？"><a href="#哪些缓存页是脏页？" class="headerlink" title="哪些缓存页是脏页？"></a>哪些缓存页是脏页？</h5>flush 链表，这个 flush 链表本质也是通过缓存页的描述数据块中的两个指<br>针，让被修改过的缓存页的描述数据块，组成一个双向链表。</li>
+<li><h5 id="淘汰缓存数据"><a href="#淘汰缓存数据" class="headerlink" title="淘汰缓存数据"></a>淘汰缓存数据</h5>引入 LRU 链表来判断哪些缓存页是不常用的。<br>使用简单的 LRU 链表的机制，其实是漏洞百出的，因为很可能预读机制，或者全表扫描的机制，都会一下子把大量未来可能不怎么访问的数据页加载到缓存页里去，然后 LRU 链表的前面全部是这些未来可能不怎么会被访问的缓存页！</li>
+<li><h5 id="基于冷热数据分离的思想设计-LRU-链表"><a href="#基于冷热数据分离的思想设计-LRU-链表" class="headerlink" title="基于冷热数据分离的思想设计 LRU 链表"></a>基于冷热数据分离的思想设计 LRU 链表</h5>参数 innodb_old_blocks_pct</li>
+<li><h5 id="触发-MySQL-的预读机制"><a href="#触发-MySQL-的预读机制" class="headerlink" title="触发 MySQL 的预读机制"></a>触发 MySQL 的预读机制</h5>参数 innodb_read_ahead_threshold、innodb_random_read_ahead</li>
+</ul>
+<p>多线程并发访问一个 Buffer Pool，必然是要加锁的，然后让一个线程先完成一系列的操作，比如说加载数据页到缓存页，更新 free 链表，更新 lru 链表，然后释放锁，接着下一个线程再执行一系列的操作。</p>
+<ul>
+<li>配置多个 Buffer Pool 优化并发能力<br>参数 innodb_buffer_pool_size、innodb_buffer_pool_instances</li>
+<li>基于 chunk 机制支持运行期间动态调整 buffer pool 大小</li>
+</ul>
+<h4 id="undo-日志文件：如何让你更新的数据可以回滚"><a href="#undo-日志文件：如何让你更新的数据可以回滚" class="headerlink" title="undo 日志文件：如何让你更新的数据可以回滚"></a>undo 日志文件：如何让你更新的数据可以回滚</h4><h4 id="Redo-Log-Buffer：万一系统宕机，如何避免数据丢失"><a href="#Redo-Log-Buffer：万一系统宕机，如何避免数据丢失" class="headerlink" title="Redo Log Buffer：万一系统宕机，如何避免数据丢失"></a>Redo Log Buffer：万一系统宕机，如何避免数据丢失</h4><h4 id="redo-日志，记录对数据做的修改"><a href="#redo-日志，记录对数据做的修改" class="headerlink" title="redo 日志，记录对数据做的修改"></a>redo 日志，记录对数据做的修改</h4><h4 id="交事务的时候将-redo-日志写入磁盘中"><a href="#交事务的时候将-redo-日志写入磁盘中" class="headerlink" title="交事务的时候将 redo 日志写入磁盘中"></a>交事务的时候将 redo 日志写入磁盘中</h4><p>三种 redo 日志刷盘策略优缺点</p>
+<h4 id="MySQL-binlog"><a href="#MySQL-binlog" class="headerlink" title="MySQL binlog"></a>MySQL binlog</h4><p>redo log，偏向物理性质的重做日志<br>binlog 归档日志，记录的是偏向于逻辑性的日志<br>binlog 不是 InnoDB 存储引擎特有的日志文件，是属于 mysql server 自己的日志文件。</p>
+<p><img src="/2022/05/20/mysql-practices-optimization/05201153.png"><br>执行器是非常核心的组件，负责跟存储引擎配合完成一个 SQL 语句在磁盘与内存层面的全部数据更新操作。<br>上图更新语句的执行，拆分为了两个阶段，1、2、3、4 几个步骤，本质是执行这个更新语句的时候干的事。<br>5 和 6 两个步骤，是从提交事务开始的，属于提交事务的阶段。<br>5、6、7 三个步骤，必须是三个步骤都执行完毕，才算是提交了事务。</p>
+<p><strong>在 redo 日志中写入 commit 标记的意义</strong><br>保持 redo log 日志与 binlog 日志一致</p>
+<h4 id="binlog-日志的刷盘策略"><a href="#binlog-日志的刷盘策略" class="headerlink" title="binlog 日志的刷盘策略"></a>binlog 日志的刷盘策略</h4><p>sync_binlog 参数</p>
+<h4 id="基于-binlog-和-redo-log-完成事务的提交"><a href="#基于-binlog-和-redo-log-完成事务的提交" class="headerlink" title="基于 binlog 和 redo log 完成事务的提交"></a>基于 binlog 和 redo log 完成事务的提交</h4><h4 id="后台-IO-线程随机将内存更新后的脏数据刷回磁盘"><a href="#后台-IO-线程随机将内存更新后的脏数据刷回磁盘" class="headerlink" title="后台 IO 线程随机将内存更新后的脏数据刷回磁盘"></a>后台 IO 线程随机将内存更新后的脏数据刷回磁盘</h4><p>&amp;nbsp;</p>
+<h4 id="QPS-TPS、IOPS、吞吐量、latency"><a href="#QPS-TPS、IOPS、吞吐量、latency" class="headerlink" title="QPS.TPS、IOPS、吞吐量、latency"></a>QPS.TPS、IOPS、吞吐量、latency</h4><p>数据库压测工具：sysbench<br>检测机器（Linux）性能 top 命令<br>对数据库监控 Prometheus+Grafana</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>&amp;nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/17/redis-6-extreme-performance/" rel="prev" title="Redis6分布式存储极致性能-笔记">
+                  <i class="fa fa-chevron-left"></i> Redis6分布式存储极致性能-笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/20/mysql-practices-45-lessons/" rel="next" title="mysql实战45讲">
+                  mysql实战45讲 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RxLoaron</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
