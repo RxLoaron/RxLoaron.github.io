@@ -120,9 +120,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -143,6 +148,459 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2023/09/27/docker-introduction-and-practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/27/docker-introduction-and-practice/" class="post-title-link" itemprop="url">docker系统性入门与进价实践</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-27 14:15:48" itemprop="dateModified" datetime="2023-09-27T14:15:48+08:00">2023-09-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2023/09/26/methods-for-optimizing-interface-performance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/26/methods-for-optimizing-interface-performance/" class="post-title-link" itemprop="url">接口性能优化的常用手段</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-26 14:21:34" itemprop="dateModified" datetime="2023-09-26T14:21:34+08:00">2023-09-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>⼀、引⾔<br>随着业务的发展，业务复杂度变⾼、⽤⼾量增加、并发量变⼤、数据量增加、技术复杂度变⾼、系统<br>调⽤链路变⻓等⼀系列变化会凸显出来，最终导致系统的性能急剧下降，⼯作中就需要持续去优化系<br>统，以应对业务的发展需要。本⽂从接⼝性能优化的⻆度，去分析接⼝性能优化需要关注的指标，以<br>及常⽤的性能优化⼿段，希望给⼤家⽇常⼯作带来帮助和启发。<br>⼆、接⼝性能的关键指标<br>关键指标<br>QPS（Queries Per Second）每秒查询<br>每秒查询数率，系统每秒能够处理的查询请求次数，即⼀台服务器每秒能够相应的查询次数，是对⼀<br>个特定的查询服务器在规定时间内所处理流量多少的衡量标准。<br>有两种计算公式：<br>QPS &#x3D; req&#x2F;sec &#x3D; 请求数&#x2F;秒<br>QPS &#x3D; 总请求数 &#x2F; ( 进程总数 * 请求时间 )<br>TPS（Transactions Per Second）每秒事务<br>每秒事务数，即每秒系统能够处理的事务次数。<br>TPS 的过程包括：客⼾端请求服务端、服务端内部处理、服务端返回客⼾端。客⼾机在发送请求时开<br>始计时，收到服务器响应后结束计时，以此来计算使⽤的时间和完成的事务个数。<br>TPS与QPS区别<br>⼀个事务是指⼀个客⼾机向服务器发送请求然后服务器做出反应的过程。⽽在这个TPS中，为了处理第<br>⼀次请求可能会引发后续多次对服务端的访问才能完成这次⼯作，每次访问都算⼀个QPS。所以，⼀<br>个TPS可能包含多个QPS<br>对于⼀个⻚⾯的⼀次访问，形成⼀个Tps；但⼀次⻚⾯请求，可能产⽣多次对服务器的请求，服务器对<br>这些请求，就可计⼊“Qps”之中。如：访问⼀个⻚⾯会请求服务器3次，⼀次放，产⽣⼀个“T”，<br>产⽣3个“Q”<br>RT（Response-time）响应时间<br>执⾏⼀个请求从开始到最后收到响应数据所花费的总体时间，即从客⼾端发起请求到收到服务器响应<br>结果的时间。它的数值⼤⼩直接反应了系统的快慢。<br>⽤⼾平均请求等待时间（Time per requests）<br>计算公式：⽤⼾平均请求等待时间 &#x3D; 总时间 &#x2F; (总请求数 &#x2F; 并发⽤⼾数)<br>服务器平均请求等待时间（Time per requests: across all concurrent requests）<br>计算公式：服务器平均等待时间 &#x3D; 总时间 &#x2F; 总请求数 &#x3D; ⽤⼾平均请求等待时间 &#x2F; 并发⽤⼾数<br>QPS和RT的关系？<br>1.对于⼤部分web系统，响应时间⼀般由CPU执⾏时间，线程等待时间（IO等待，sleep, wait）时间组<br>成。QPS和RT成反⽐关系<br>2.在实际的测试环境中，QPS和RT并不是⾮常直接的反⽐关系<br>并发数（The number of concurrent connections）<br>并发请求数&#x2F;连接数，是指系统同时能处理的请求数量，这个也是反应了系统的负载能⼒。<br>计算公式：并发量 &#x3D; QPS * 平均响应时间，并发请求数 &#x3D; 并发⽤⼾数 * 单个⽤⼾平均请求数<br>并发⽤⼾数（The number of concurrent users, Concurrent Level）<br>指的是某个时刻同时在线的⽤⼾数。⼀个⽤⼾可能同时会产⽣多个会话，也即多个请求连接数。<br>RPS（Requests Per Second ）吞吐量<br>吞吐量是指单位时间内系统能处理的请求数量，单位是 reqs&#x2F;s，体现系统处理请求的能⼒。<br>吞吐率是基于并发⽤⼾数的。这句话代表了两个含义：<br>a、吞吐率和并发⽤⼾数相关；<br>b、不同的并发⽤⼾数下，吞吐率⼀般是不同的<br>某个并发⽤⼾数下单位时间内能处理的最⼤的请求数，称之为最⼤吞吐率。<br>系统的吞吐量（承压能⼒）与request对CPU的消耗、外部接⼝、IO等等紧密关联。单个request 对<br>CPU消耗越⾼，外部系统接⼝、IO速度越慢，系统吞吐能⼒越低，反之越⾼。系统吞吐量⼏个重要参<br>数：QPS（TPS）、并发数、响应时间。<br>计算公式：吞吐率 &#x3D;并发请求数&#x2F;总请求处理时⻓<br>⽐如：在并发⽤⼾数为1000时，⼀共有5000个请求，请求了5分钟，那么每秒钟，服务器可以处理<br>5000&#x2F;5<em>60 &#x3D; 16个请求呢。这就是服务器的吞吐率。<br>PV（Page View）⻚⾯访问量<br>⻚⾯被浏览的次数，每次⽤⼾访问或者刷新⻚⾯都会被计算在内。<br>⽤⼾对同⼀⻚⾯的多次刷新，访问量累计。与 PV 相关的还有 RV，即重复访问者数量（repeat<br>visitors）。<br>计算公式：<br>⽇PV&#x3D;QPS</em>60<em>60</em>24 &#x2F;&#x2F;即QPS乘以⼀天的秒数<br>峰值QPS&#x3D;(⽇PV<em>80%)&#x2F;(60</em>60<em>24</em>20%） &#x2F;&#x2F;通⽤公式每天80%的访问集中在20%的时间⾥，这20%时<br>间叫做峰值时间<br>UV（Unique Visitor）独⽴访客访问数<br>统计 1 天内访问某站点的⽤⼾数(以 cookie 为依据)，⼀台电脑终端为⼀个访客。<br>可以理解成访问某⽹站的电脑的数量。⽹站判断来访电脑的⾝份是通过来访电脑的 cookies 实现的。<br>如果更换了 IP 后但不清除 cookies，再访问相同⽹站，该⽹站的统计中 UV 数是不变的。如果⽤⼾不<br>保存 cookies 访问、清除了 cookies 或者更换设备访问，计数会加 1。00:00-24:00 内相同的客⼾端多<br>次访问只计为 1 个访客。<br>IP（Internet Protocol）独⽴ IP 数<br>指 1 天内多少个独⽴的 IP 浏览了⻚⾯，即统计不同的 IP 浏览⽤⼾数量。<br>同⼀ IP 不管访问了⼏个⻚⾯，独⽴ IP 数均为 1；不同的 IP 浏览⻚⾯，计数会加 1。IP 是基于⽤⼾⼴域<br>⽹ IP 地址来区分不同的访问者的，所以，多个⽤⼾（多个局域⽹ IP）在同⼀个路由器（同⼀个⼴域⽹<br>IP）内上⽹，可能被记录为⼀个独⽴ IP 访问者。如果⽤⼾不断更换 IP，则有可能被多次统计。<br>实际举例<br>我们通过⼀个实例来把上⾯⼏个概念串起来理解。如果每天 80% 的访问集中在 20% 的时间⾥，这<br>20% 时间就叫做峰值时间。<br>公式：(总PV数 * 80% ) &#x2F; ( 每天秒数 * 20% ) &#x3D; 峰值时间每秒请求数(QPS)<br>机器：峰值时间每秒QPS &#x2F; 单台机器的QPS &#x3D; 需要的机器<br>1、每天300w PV 的在单台机器上，这台机器需要多少QPS？<br>( 3000000 * 0.8 ) &#x2F; (86400 * 0.2 ) &#x3D; 139 (QPS)<br>2、如果⼀台机器的QPS是58，需要⼏台机器来⽀持？<br>139 &#x2F; 58 &#x3D; 3<br>3、服务器计算<br>服务器数量 &#x3D; ceil( 每天总PV &#x2F; 单台服务器每天总PV )<br>最佳线程数<br>1、单线程QPS公式：QPS&#x3D;1000ms&#x2F;RT<br>对同⼀个系统⽽⾔，⽀持的线程数越多，QPS越⾼。假设⼀个RT是80ms, 则可以很容易的计算出QPS,<br>QPS &#x3D; 1000&#x2F;80 &#x3D; 12.5<br>多线程场景，如果把服务端的线程数提升到2，那么整个系统的QPS则为 2<em>（1000&#x2F;80） &#x3D; 25, 可⻅<br>QPS随着线程的增加⽽线性增⻓，那QPS上不去就加线程呗，听起来很有道理，公司也说的通，但是<br>往往现实并⾮如此。<br>2、最佳线程数量<br>刚好消耗完服务器的瓶颈资源的临界线程数，公式如下<br>最佳线程数量&#x3D;（（线程等待时间+线程cpu时间）&#x2F;线程cpu时间）</em> cpu数量<br>特性：<br>• 在达到最佳线程数的时候，线程数量继续递增，则QPS不变，⽽响应时间变⻓，持续递增线程数<br>量，则QPS开始下降。<br>• 每个系统都有其最佳线程数量，但是不同状态下，最佳线程数量是会变化的。<br>• 瓶颈资源可以是CPU, 可以是内存，可以是锁资源，IO资源：超过最佳线程数-导致资源的竞争，超<br>过最佳线程数-响应时间递增。<br>常⽤压测⼯具<br>1、Apache JMeter<br>JMeter作为⼀款⼴为流传的开源压测产品，最初被设计⽤于Web应⽤测试，如今JMeter可以⽤于测试<br>静态和动态资源，例如静态⽂件、Java ⼩服务程序、CGI 脚本、Java 对象、数据库、FTP服务器等<br>等，还能对服务器、⽹络或对象模拟巨⼤的负载，通过不同压⼒类别测试它们的强度和分析整体性<br>能。另外，JMeter能够对应⽤程序做功能测试和回归测试，通过创建带有断⾔的脚本来验证你的程序<br>返回了你期望的结果。为了最⼤限度的灵活性，JMeter允许使⽤正则表达式创建断⾔。<br>JMeter的特点：<br>• 包括对HTTP、FTP服务器、数据库进⾏压⼒测试和性能测试；<br>• 完全的可移植性；完全 Swing和轻量组件⽀持包；<br>• 完全多线程；<br>• 缓存和离线分析&#x2F;回放测试结果；<br>• 可链接的取样器；<br>• 具有提供动态输⼊到测试的功能；<br>• ⽀持脚本编程的取样器等。在设计阶段，<br>• JMeter能够充当HTTP PROXY（代理）来记录浏览器的HTTP请求，也可以记录Apache等<br>WebServer的log⽂件来重现HTTP流量，并在测试运⾏时以此为依据设置重复次数和并发度（线程<br>数）来进⾏压测。<br>参考⽂章：《云智慧压测实战分享之JMeter⼯具使⽤初探》<br>（<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007922515%EF%BC%89">https://segmentfault.com/a/1190000007922515）</a><br>官⽹链接：<a target="_blank" rel="noopener" href="http://jmeter.apache.org/">http://jmeter.apache.org/</a><br>2、LoadRunner<br>LoadRunner是⼀种预测系统⾏为和性能的负载测试⼯具，通过模拟实际⽤⼾的操作⾏为进⾏实时性能<br>监测，来帮助测试⼈员更快的查找和发现问题。LoadRunner适⽤于各种体系架构，能⽀持⼴泛的协议<br>和技术，为测试提供特殊的解决⽅案。企业通过LoadRunner能最⼤限度地缩短测试时间，优化性能并<br>加速应⽤系统的发布周期。<br>LoadRunner提供了3⼤主要功能模块：VirtualUser Generator（⽤于录制性能测试脚本），<br>LoadRunner Controller（⽤于创建、运⾏和监控场景），LoadRunner Analysis（⽤于分析性能测试<br>结果）既可以作为独⽴的⼯具完成各⾃的功能，⼜可以作为LoadRunner的⼀部分彼此衔接，与其他模<br>块共同完成软件性能的整体测试。<br>详⻅：《性能测试⼊⻔⸺LoadRunner使⽤初探》<br>（<a target="_blank" rel="noopener" href="http://www.admin5.com/article/20161114/695706.shtml%EF%BC%89">http://www.admin5.com/article/20161114/695706.shtml）</a><br>LoadRunner官⽹：<a target="_blank" rel="noopener" href="https://saas.hpe.com/zh-cn/software/loadrunner">https://saas.hpe.com/zh-cn/software/loadrunner</a><br>三、接⼝性能优化的常⽤⼿段</p>
+<ol>
+<li>批量思想：批量操作数据库<br>优化前：<br>1 &#x2F;&#x2F;for循环单笔⼊库<br>2 for(TransDetail detail:transDetailList){<br>3 insert(detail);<br>4 }<br>优化后：<br>1 batchInsert(transDetailList);</li>
+<li>异步思想：耗时操作，考虑放到异步执⾏<br>耗时操作，考虑⽤异步处理 ，这样可以降低接⼝耗时。<br>假设⼀个转账接⼝，匹配联⾏号，是同步执⾏的，但是它的操作耗时有点⻓ ，优化前的流程：<br>为了降低接⼝耗时，更快返回，你可以把匹配联⾏号 移到异步处理 ，优化后：<br>• 除了转账这个例⼦，⽇常⼯作中还有很多这种例⼦。⽐如：⽤⼾注册成功后，短信邮件通知，也是<br>可以异步处理的 ~<br>• ⾄于异步的实现⽅式，你可以⽤线程池，也可以⽤消息队列实现 。</li>
+<li>空间换时间思想：恰当使⽤缓存<br>在适当的业务场景，恰当地使⽤缓存，是可以⼤⼤提⾼接⼝性能的。缓存其实就是⼀种空间换时间的<br>思想 ，就是你把要查的数据，提前放好到缓存⾥⾯，需要时，直接查缓存，⽽避免去查数据库或者计<br>算的过程 。<br>这⾥的缓存包括： Redis 缓存， JVM 本地缓存， memcached ，或者 Map 等等。我举个我⼯作<br>中，⼀次使⽤缓存优化的设计吧，⽐较简单，但是思路很有借鉴的意义。<br>那是⼀次转账接⼝的优化，⽼代码 ，每次转账，都会根据客⼾账号，查询数据库，计算匹配联⾏<br>号。<br>因为每次都查数据库，都计算匹配，⽐较耗时 ，所以使⽤缓存 ，优化后流程如下：</li>
+<li>预取思想：提前初始化到缓存<br>预取思想很容易理解，就是提前把要计算查询的数据，初始化到缓存 。如果你在未来某个时间需要⽤<br>到某个经过复杂计算的数据，才实时去计算的话，可能耗时⽐较⼤ 。这时候，我们可以采取预取思<br>想，提前把将来可能需要的数据计算好，放到缓存中 ，等需要的时候，去缓存取就⾏。这将⼤幅度提<br>⾼接⼝性能。<br>我记得以前在第⼀个公司做视频直播的时候，看到我们的直播列表就是⽤到这种优化⽅案 。就是启动<br>个任务，提前把直播⽤⼾、积分等相关信息，初始化到缓存 。</li>
+<li>池化思想：预分配与循环使⽤<br>⼤家应该都记得，我们为什么需要使⽤线程池 ？<br>线程池可以帮我们管理线程，避免增加创建线程和销毁线程的资源损耗。<br>如果你每次需要⽤到线程，都去创建，就会有增加⼀定的耗时，⽽线程池可以重复利⽤线程，避免不<br>必要的耗时。 池化技术不仅仅指线程池，很多场景都有池化思想的体现，它的本质就是预分配与循环<br>使⽤ 。<br>⽐如 TCP 三次握⼿，⼤家都很熟悉吧，它为了减少性能损耗，引⼊了 Keep-Alive⻓连接 ，避免频<br>繁的创建和销毁连接。当然，类似的例⼦还有很多，如数据库连接池、 HttpClient 连接池。<br>我们写代码的过程中，学会池化思想 ，最直接相关的就是使⽤线程池⽽不是去 new ⼀个线程。</li>
+<li>事件回调思想：拒绝阻塞等待<br>如果你调⽤⼀个系统 B 的接⼝，但是它处理业务逻辑，耗时需要 10s 甚⾄更多。然后你是⼀直阻塞<br>等待，直到系统B的下游接⼝返回 ，再继续你的下⼀步操作吗？这样显然不合理 。<br>我们参考IO多路复⽤模型 。即我们不⽤阻塞等待系统 B 的接⼝，⽽是先去做别的操作。等系统 B 的<br>接⼝处理完，通过事件回调 通知，我们接⼝收到通知再进⾏对应的业务操作即可。</li>
+<li>远程调⽤由串⾏改为并⾏<br>假设我们设计⼀个APP⾸⻚的接⼝，它需要查⽤⼾信息、需要查banner信息、需要查弹窗信息等等。<br>如果是串⾏⼀个⼀个查，⽐如查⽤⼾信息 200ms ，查banner信息 100ms 、查弹窗信息 50ms ，那<br>⼀共就耗时 350ms 了，如果还查其他信息，那耗时就更⼤了。<br>其实我们可以改为并⾏调⽤，即查⽤⼾信息、查banner信息、查弹窗信息，可以同时并⾏发起 。<br>最后接⼝耗时将⼤⼤降低 。</li>
+<li>锁粒度避免过粗<br>在⾼并发场景，为了防⽌超卖等情况 ，我们经常需要加锁来保护共享资源 。但是，如果加锁的粒度过<br>粗，是很影响接⼝性能的。<br>什么是加锁粒度呢？<br>其实就是就是你要锁住的范围是多⼤。⽐如你在家上卫⽣间，你只要锁住卫⽣间就可以了吧 ，不需<br>要将整个家都锁起来不让家⼈进⻔吧，卫⽣间就是你的加锁粒度。<br>不管你是 synchronized 加锁还是 redis 分布式锁，只需要在共享临界资源加锁即可，不涉及共<br>享资源的，就不必要加锁。这就好像你上卫⽣间，不⽤把整个家都锁住，锁住卫⽣间⻔就可以了。<br>⽐如，在业务代码中，有⼀个 ArrayList 因为涉及到多线程操作，所以需要加锁操作，假设刚好⼜<br>有⼀段⽐较耗时的操作（代码中的 slowNotShare ⽅法）不涉及线程安全问题。反例加锁，就是⼀<br>锅端，全锁住 :<br>1 &#x2F;&#x2F;不涉及共享资源的慢⽅法<br>2 private void slowNotShare() {<br>3 try {<br>4 TimeUnit.MILLISECONDS.sleep(100);<br>5 } catch (InterruptedException e) {<br>6 }<br>7 }<br>8<br>9 &#x2F;&#x2F;错误的加锁⽅法<br>10 public int wrong() {<br>11 long beginTime &#x3D; System.currentTimeMillis();<br>12 IntStream.rangeClosed(1, 10000).parallel().forEach(i -&gt; {<br>13 &#x2F;&#x2F;加锁粒度太粗了，slowNotShare其实不涉及共享资源<br>14 synchronized (this) {<br>15 slowNotShare();<br>16 data.add(i);<br>17 }<br>18 });<br>19 log.info(“cosume time:{}”, System.currentTimeMillis() - beginTime);<br>20 return data.size();<br>21 }<br>正例：<br>1 public int right() {<br>2 long beginTime &#x3D; System.currentTimeMillis();<br>3 IntStream.rangeClosed(1, 10000).parallel().forEach(i -&gt; {<br>4 slowNotShare();&#x2F;&#x2F;可以不加锁<br>5 &#x2F;&#x2F;只对List这部分加锁<br>6 synchronized (data) {<br>7 data.add(i);<br>8 }<br>9 });<br>10 log.info(“cosume time:{}”, System.currentTimeMillis() - beginTime);<br>11 return data.size();<br>12 }</li>
+<li>切换存储⽅式：⽂件中转暂存数据<br>如果数据太⼤，落地数据库实在是慢的话，就可以考虑先⽤⽂件的⽅式暂存 。先保存⽂件，再异步下<br>载⽂件，慢慢保存到数据库 。<br>这⾥可能会有点抽象，给⼤家分享⼀个，我之前的⼀个真实的优化案例 吧。<br>之前开发了⼀个转账接⼝。如果是并发开启，10个并发度，每个批次 1000 笔转账明细数据，数据<br>库插⼊会特别耗时，⼤概6秒左右 ；这个跟我们公司的数据库同步机制有关，并发情况下，因为优先<br>保证同步，所以并⾏的插⼊变成串⾏啦，就很耗时。<br>优化前 ， 1000 笔明细转账数据，先落地 DB 数据库，返回处理中给⽤⼾，再异步转账。如图：<br>记得当时压测的时候，⾼并发情况，这 1000 笔明细⼊库，耗时都⽐较⼤。所以我转换了⼀下思路，<br>把批量的明细转账记录保存的⽂件服务器，然后记录⼀笔转账总记录到数据库即可 。接着异步再把明<br>细下载下来，进⾏转账和明细⼊库。最后优化后，性能提升了⼗⼏倍 。<br>优化后 ，流程图如下：<br>如果你的接⼝耗时瓶颈就在数据库插⼊操作这⾥ ，⽤来批量操作等，还是效果还不理想，就可以考虑<br>⽤⽂件或者 MQ 等暂存。有时候批量数据放到⽂件，会⽐插⼊数据库效率更⾼。</li>
+<li>索引<br>提到接⼝优化，很多⼩伙伴都会想到添加索引 。没错，添加索引是成本最⼩的优化 ，⽽且⼀般优化效<br>果都很不错。<br>索引优化这块的话，⼀般从这⼏个维度去思考：<br>• 你的SQL加索引了没？<br>• 你的索引是否真的⽣效？<br>• 你的索引建⽴是否合理？<br>10.1 SQL没加索引<br>我们开发的时候，容易疏忽⽽忘记给SQL添加索引。所以我们在写完 SQL 的时候，就顺⼿查看⼀下<br>explain 执⾏计划。<br>1 explain select * from user_info where userId like ‘%123’;<br>你也可以通过命令 show create table ，整张表的索引情况。<br>1 show create table user_info;<br>如果某个表忘记添加某个索引，可以通过 alter table add index 命令添加索引<br>1 alter table user_info add index idx_name (name);<br>⼀般就是： SQL 的 where 条件的字段，或者是 order by 、group by 后⾯的字段需需要添加<br>索引。<br>10.2 索引不⽣效<br>有时候，即使你添加了索引，但是索引会失效的。索引失效的常⻅原因 ：<br>10.3 索引设计不合理<br>我们的索引不是越多越好，需要合理设计。⽐如：<br>• 删除冗余和重复索引。<br>• 索引⼀般不能超过 5 个<br>• 索引不适合建在有⼤量重复数据的字段上、如性别字段<br>• 适当使⽤覆盖索引<br>• 如果需要使⽤ force index 强制⾛某个索引，那就需要思考你的索引设计是否真的合理了</li>
+<li>优化SQL<br>除了索引优化，其实SQL还有很多其他有优化的空间。⽐如这些：<br>12.避免⼤事务问题<br>为了保证数据库数据的⼀致性，在涉及到多个数据库修改 操作时，我们经常需要⽤到事务。⽽使⽤<br>spring 声明式事务，⼜⾮常简单，只需要⽤⼀个注解就⾏ @Transactional ，如下⾯的例⼦：<br>1 @Transactional<br>2 public int createUser(User user){<br>3 &#x2F;&#x2F;保存⽤⼾信息<br>4 userDao.save(user);<br>5 passCertDao.updateFlag(user.getPassId());<br>6 return user.getUserId();<br>7 }<br>这块代码主要逻辑就是创建个⽤⼾，然后更新⼀个通⾏证 pass 的标记。如果现在新增⼀个需求，创<br>建完⽤⼾，调⽤远程接⼝发送⼀个 email 消息通知，很多⼩伙伴会这么写：<br>1 @Transactional<br>2 public int createUser(User user){<br>3 &#x2F;&#x2F;保存⽤⼾信息<br>4 userDao.save(user);<br>5 passCertDao.updateFlag(user.getPassId());<br>6 sendEmailRpc(user.getEmail());<br>7 return user.getUserId();<br>8 }<br>这样实现可能会有坑，事务中嵌套 RPC 远程调⽤，即事务嵌套了⼀些⾮ DB 操作。如果这些⾮ DB 操<br>作耗时⽐较⼤的话，可能会出现⼤事务问题 。<br>所谓⼤事务问题就是，就是运⾏时间⻓的事务 。由于事务⼀致不提交，就会导致数据库连接被占<br>⽤，即并发场景下，数据库连接池被占满，影响到别的请求访问数据库，影响别的接⼝性能 。<br>⼤事务引发的问题主要有：接⼝超时、死锁、主从延迟 等等。因此，为了优化接⼝，我们要规避⼤事<br>务问题。我们可以通过这些⽅案来规避⼤事务：<br>• RPC远程调⽤不要放到事务⾥⾯<br>• ⼀些查询相关的操作，尽量放到事务之外<br>• 事务中避免处理太多数据</li>
+<li>深分⻚问题<br>在以前公司分析过⼏个接⼝耗时⻓的问题，最终结论都是因为深分⻚问题 。<br>深分⻚问题，为什么会慢？我们看下这个SQL<br>1 select id,name,balance from account where create_time&gt; ‘2020-09-19’ limit 100000<br>limit 100000,10 意味着会扫描 100010 ⾏，丢弃掉前 100000 ⾏，最后返回 10 ⾏。即使<br>create_time ，也会回表很多次。<br>我们可以通过标签记录法和延迟关联法 来优化深分⻚问题。<br>13.1 标签记录法<br>就是标记⼀下上次查询到哪⼀条了，下次再来查的时候，从该条开始往下扫描。就好像看书⼀样，上<br>次看到哪⾥了，你就折叠⼀下或者夹个书签，下次来看的时候，直接就翻到啦。<br>假设上⼀次记录到 100000 ，则SQL可以修改为：<br>1 select id,name,balance FROM account where id &gt; 100000 limit 10;<br>这样的话，后⾯⽆论翻多少⻚，性能都会不错的，因为命中了 id 主键索引。但是这种⽅式有局限<br>性：需要⼀种类似连续⾃增的字段。<br>13.2 延迟关联法<br>延迟关联法，就是把条件转移到主键索引树，然后减少回表。优化后的SQL如下：<br>1 select acct1.id,acct1.name,acct1.balance FROM account acct1 INNER JOIN (SELECT<br>优化思路就是 ，先通过 idx_create_time ⼆级索引树查询到满⾜条件的主键ID，再与原表通过主<br>键ID内连接，这样后⾯直接⾛了主键索引了，同时也减少了回表。</li>
+<li>优化程序结构<br>优化程序逻辑、程序代码，是可以节省耗时的。⽐如，你的程序创建多不必要的对象、或者程序逻辑<br>混乱，多次重复查数据库、⼜或者你的实现逻辑算法不是最⾼效的 ，等等。<br>我举个简单的例⼦：复杂的逻辑条件，有时候调整⼀下顺序，就能让你的程序更加⾼效。<br>假设业务需求是这样：如果⽤⼾是会员，第⼀次登陆时，需要发⼀条感谢短信。如果没有经过思考，<br>代码直接这样写了<br>1 if(isUserVip &amp;&amp; isFirstLogin){<br>2 sendSmsMsg();<br>3 }<br>假设有 5 个请求过来， isUserVip 判断通过的有 3 个请求， isFirstLogin 通过的只有 1 个请<br>求。那么以上代码， isUserVip 执⾏的次数为 5 次， isFirstLogin 执⾏的次数也是 3 次，如<br>下：<br>如果调整⼀下 isUserVip 和 isFirstLogin 的顺序：<br>1 if(isFirstLogin &amp;&amp; isUserVip ){<br>2 sendMsg();<br>3 }<br>isFirstLogin 执⾏的次数是 5 次， isUserVip 执⾏的次数是 1 次：<br>酱紫程序是不是变得更⾼效了呢？</li>
+<li>压缩传输内容<br>压缩传输内容，传输报⽂变得更⼩，因此传输会更快啦。 10M 带宽，传输 10k 的报⽂，⼀般⽐传输<br>1M 的会快呀。<br>打个⽐喻，⼀匹千⾥⻢，它驮着100⽄的货跑得快，还是驮着10⽄的货物跑得快呢？<br>再举个视频⽹站的例⼦：<br>如果不对视频做任何压缩编码，因为带宽⼜是有限的。巨⼤的数据量在⽹络传输的耗时会⽐编码压缩<br>后，慢好多倍</li>
+<li>海量数据处理，考虑NoSQL<br>之前看过⼏个慢 SQL ，都是跟深分⻚问题有关的。发现⽤来标签记录法和延迟关联法，效果不是很明<br>显 ，原因是要统计和模糊搜索，并且统计的数据是真的⼤。最后跟组⻓对⻬⽅案，就把数据同步到<br>Elasticsearch ，然后这些模糊搜索需求，都⾛ Elasticsearch 去查询了。<br>我想表达的就是，如果数据量过⼤，⼀定要⽤关系型数据库存储的话，就可以分库分表。但是有时<br>候，我们也可以使⽤ NoSQL，如Elasticsearch、Hbase 等。</li>
+<li>线程池设计要合理<br>我们使⽤线程池，就是让任务并⾏处理，更⾼效地完成任务 。但是有时候，如果线程池设计不合理，<br>接⼝执⾏效率则不太理想。<br>⼀般我们需要关注线程池的这⼏个参数：核⼼线程、最⼤线程数量、阻塞队列 。<br>• 如果核⼼线程过⼩，则达不到很好的并⾏效果。<br>• 如果阻塞队列不合理，不仅仅是阻塞的问题，甚⾄可能会 OOM<br>• 如果线程池不区分业务隔离，有可能核⼼业务被边缘业务拖垮 。<br>18.机器问题 （fullGC、线程打满、太多IO资源没关闭等等）<br>有时候，我们的接⼝慢，就是机器处理问题。主要有 fullGC 、线程打满、太多IO资源没关闭等等。<br>• 之前排查过⼀个 fullGC 问题：运营⼩姐姐导出 60多万 的 excel 的时候，说卡死 了，接着我<br>们就收到监控告警。后⾯排查得出，我们⽼代码是 Apache POI ⽣成的 excel ，导出 excel<br>数据量很⼤时，当时JVM内存吃紧会直接 Full GC 了。<br>• 如果线程打满了，也会导致接⼝都在等待了。所以。如果是⾼并发场景，我们需要接⼊限流，把多<br>余的请求拒绝掉 。<br>• 如果IO资源没关闭，也会导致耗时增加 。这个⼤家可以看下，平时你的电脑⼀直打开很多很多⽂<br>件，是不是会觉得很卡。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2023/09/26/advanced-java-engineer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/26/advanced-java-engineer/" class="post-title-link" itemprop="url">advanced-java-engineer</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-27 11:28:54" itemprop="dateModified" datetime="2023-09-27T11:28:54+08:00">2023-09-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h5 id="1-项目性能优化"><a href="#1-项目性能优化" class="headerlink" title="1. 项目性能优化"></a>1. 项目性能优化</h5><p>性能问题分析理论：3S 定理<br> 性能指标：RT、TPS、并发数…<br> 压测监控平台：Docker、InfluxDB、Grafana、Prometheus 和 node_exporter 环境搭建<br> 梯度压测：分析接口性能瓶颈<br> 性能瓶颈剖析<br> 分布式压测：构建百万次请求的压力<br> 服务容器优化：Tomcat、IO 模型、Undertow 等调优<br> 数据库调优：为什么要数据库调优，什么影响数据库性能<br> OpenResty 调优<br> 多级缓存调优<br> JVM 调优：为什么 JVM 调优，什么时候调优，调优调什么？</p>
+<h5 id="2-JVM虚拟机"><a href="#2-JVM虚拟机" class="headerlink" title="2. JVM虚拟机"></a>2. JVM虚拟机</h5>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2023/09/05/in-depth-analysis-k8s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/05/in-depth-analysis-k8s/" class="post-title-link" itemprop="url">深入剖析k8s</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 14:22:50" itemprop="dateModified" datetime="2023-09-05T14:22:50+08:00">2023-09-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2023/08/22/tech-management-case/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/08/22/tech-management-case/" class="post-title-link" itemprop="url">技术管理案例</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-29 14:53:25" itemprop="dateModified" datetime="2023-08-29T14:53:25+08:00">2023-08-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2023/07/21/math-literacy-50/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RxLoaron">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | RxLoaron's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/21/math-literacy-50/" class="post-title-link" itemprop="url">数学通识50课</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-08 14:14:06" itemprop="dateModified" datetime="2023-10-08T14:14:06+08:00">2023-10-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>一个学好数学的最重要的方法是：不断训练自己的思维方式。</li>
+<li>升级思维认知：从个案到整体规律，从个别定理到完整的知识体系，从具体到抽象，从完全的确定性，到把握不确定性。</li>
+<li>数学与自然科学的区别：<ol>
+<li>推理逻辑与测量的区别。</li>
+<li>用逻辑证明与用事实证实的区别。</li>
+<li>数学结论的绝对性与科学结论的相对性的区别。</li>
+</ol>
+</li>
+</ol>
+<p>数学定理不接受例外情况，数学定理的大致确立过程：从几个特例，到发现很多例证，提出猜想，证明猜想，成立定理，定理会有推论，在此基础上，有新的定理和应用。  </p>
+<ol start="4">
+<li>数学思维最重要的原则就是：从逻辑出发思考问题。基于数学知识，用逻辑发现问题、预见问题。</li>
+<li>数学的边界是一个硬边界，数学的边界有时候不一定是我们解决问题的边界，除了数学的方法，还可以寻找其他的方法。很多工程上的问题，可以通过使用近似的数值解，解决实际的问题。</li>
+<li>数学和其他知识体系有密切的联系，掌握数学上的基本原则，有助于对其他知识的理解和应用。</li>
+<li>有准则总比没有好。</li>
+<li>少数几个数得到的所谓“规律”，和采用大量数据后得到的规律，是两回事；数学大部分时候研究的不是一个孤立的数，而是揭示一些规律和趋势；数列，关心的不仅是积累的趋势，还有积累的速度、和积累的结果。</li>
+<li>数学就是工具，个别具体问题的解题技巧，其作用有限。学习数学最需要做的就是，将问题由自然语言翻译成数学语言，然后用数学的工具解决问题。学会把问题抽象成模型，才能解决更多更难的新问题。</li>
+<li>学习数学应注重学习的是概念，及概念之间的联系，把现实问题转化为数学问题。不要花太多时间在那些无法举一反三的解题技巧上。</li>
+<li>从形象到抽象，现实不存在，但是建立在不存在的基础之上的工具，却能解决实际的问题。</li>
+<li>无穷大不是一个静态的、具体的大数字，而是一个动态的，不断扩大的变化趋势。不能以有限的认知，去理解无限的事物。</li>
+<li>无穷小不是一个数，和无穷大一样，是一个概念、一个趋势。它弥补了关于数字在连续性方面的一个定义的缺失。</li>
+<li>无穷大、无穷小不是具体的数字，但是它们也能比较大小，比的不是具体数字，而是变化的趋势。变化趋势快的，叫高阶，变化趋势慢的，叫低阶。</li>
+<li>函数的4个共性：函数里面都有变量；都有一种对应关系；对应关系必须是确定的；函数所对应的关系，可以通过数学的方法，或者其他方法算出来。任何一个变量只能对应一个函数值，一个变量对应多个函数值，这种关系不是函数；有了函数，很容易看出两个变量之间是怎样互相影响的；函数让我们从对具体事物、具体数字的关注变成对趋势的关注，而且可以准确度量变化趋势带来的差异；函数可以帮助我们通过学习几个个例，掌握解决一系列问题的方法。我们的思维方式要从常数思维到变量思维，到函数思维。函数为同一类问题提供具有普遍性的答案。</li>
+<li>函数中的因果关系：1-数学中的因果关系和生活中的可能不完全相同；2-当一个函数的变化由两个、或更多个变量决定时，单个变量和函数之间的因果关系，并不是函数值变化的必然原因。</li>
+<li>导数的本质是对变化快慢的准确量化度量。</li>
+<li>导数在数学上更本质的意义是，在于它是对于连续性的一种测度，光滑、连续的导数曲线，可以成为判断未来走势的依据。</li>
+<li>有关不确定性的规律，只有在大量随机性实验时才显现出来，当试验的次数不足，它则显现出偶然性和随意性。<br>伯努利分布；方差；标准差；</li>
+<li>泊松分布、高斯分布</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -443,415 +901,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/05/17/redis-6-extreme-performance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="RxLoaron">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/17/redis-6-extreme-performance/" class="post-title-link" itemprop="url">Redis6分布式存储极致性能-笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-19 11:52:24" itemprop="dateModified" datetime="2022-05-19T11:52:24+08:00">2022-05-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="Bitmap-计数、布隆过滤器"><a href="#Bitmap-计数、布隆过滤器" class="headerlink" title="Bitmap 计数、布隆过滤器"></a>Bitmap 计数、布隆过滤器</h4><p>通过一个 bit 位来表示某个元素对应的值或者状态，其中的 key 就是对应元素本身。<br><strong>优势：</strong><br>省空间、操作快、计算快、方便扩容<br><strong>限制：</strong><br>redis 中 bit 映射被限制在 512MB 之内，最大 2^32 位。</p>
-<p>布隆过滤器（Bloom Filter）是一个高空间利用率的概率性数据结构，由二进制向量（即位数组）和一系列随机映射函数（即哈希函数）两部分组成。<br>使用布隆过滤器中的哈希函数对元素值进行计算，得到哈希值（几个哈希函数得到几个哈希值）。<br>根据哈希值，在位数组中把对应下标的值置为 1。</p>
-<h4 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h4><p>命令 pfadd、pfcount、pfmerge<br>redis 集群最大槽数 16384？crc16 算法</p>
-<h4 id="GEO"><a href="#GEO" class="headerlink" title="GEO"></a>GEO</h4>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/03/10/interesting-learning-design-pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="RxLoaron">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/10/interesting-learning-design-pattern/" class="post-title-link" itemprop="url">设计模式之美-趣学设计模式，告别烂代码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-19 11:45:09" itemprop="dateModified" datetime="2023-07-19T11:45:09+08:00">2023-07-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3><h4 id="-3"><a href="#-3" class="headerlink" title=""></a></h4><h5 id="-4"><a href="#-4" class="headerlink" title=""></a></h5><h6 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h6><p>如何实现一个单例？<br>构造函数需要是 private 访问权限的，这样才能避免外部通过 new 创建实例；<br>考虑对象创建时的线程安全问题；<br>考虑是否支持延迟加载；<br>考虑 getInstance() 性能是否高（是否加锁）。 </p>
-<p>单例模式存在的问题：<br>单例对 OOP 特性的支持不友好<br>单例会隐藏类之间的依赖关系<br>单例对代码的扩展性不友好<br>单例对代码的可测试性不友好<br>单例不支持有参数的构造函数 </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/03/09/performance-test-practices/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="RxLoaron">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/09/performance-test-practices/" class="post-title-link" itemprop="url">性能测试实战</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-09 10:50:44" itemprop="dateModified" datetime="2022-03-09T10:50:44+08:00">2022-03-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/03/09/api-test-practices/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="RxLoaron">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/09/api-test-practices/" class="post-title-link" itemprop="url">接口测试实战</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-09 10:50:13" itemprop="dateModified" datetime="2022-03-09T10:50:13+08:00">2022-03-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/03/08/relearn-operating-system/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="RxLoaron">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/08/relearn-operating-system/" class="post-title-link" itemprop="url">重学操作系统</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-07-05 14:50:19" itemprop="dateModified" datetime="2022-07-05T14:50:19+08:00">2022-07-05</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rxloaron.github.io/2022/03/04/java-src-analyze-34-lessons/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="RxLoaron">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | RxLoaron's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/04/java-src-analyze-34-lessons/" class="post-title-link" itemprop="url">Java源码剖析34讲</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-04 14:21:46" itemprop="dateModified" datetime="2022-03-04T14:21:46+08:00">2022-03-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
